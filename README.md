@@ -26,7 +26,7 @@ are read from environment variables or a local `.env` file.
 Use Python 3.10 or newer:
 
 ```powershell
-cd E:\Desktop\LLM
+cd folder_name
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
@@ -59,6 +59,12 @@ Start Streamlit in another terminal:
 ```powershell
 .\.venv\Scripts\Activate.ps1
 streamlit run frontend\app.py
+```
+or 
+
+```powershell
+cd frontend
+streamlit run app.py
 ```
 
 Open the Streamlit URL printed by the command (normally
@@ -111,22 +117,6 @@ python evaluate.py --repository-path "C:\work\my-project" --eval-file "eval_sets
 python evaluate.py --repository-path "C:\work\my-project" --eval-file "eval_sets\my-project.json" --answers
 ```
 
-Example gold-label dataset:
-
-```json
-[
-  {
-    "question": "Where is user input validated?",
-    "expected": [
-      {
-        "file_path": "src/validation.py",
-        "start_line": 10,
-        "end_line": 24
-      }
-    ]
-  }
-]
-```
 
 The evaluator checks BM25, vector, hybrid, and hybrid-plus-reranking retrieval
 with Recall@K, Precision@K, hit rate, MRR, and latency; it records per-question
