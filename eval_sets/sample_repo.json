@@ -1,0 +1,26 @@
+[
+  {
+    "question": "Which function checks whether the supplied password matches the stored password?",
+    "expected": [{"file_path": "auth.py", "start_line": 1, "end_line": 5}]
+  },
+  {
+    "question": "What does the login function do with the username?",
+    "expected": [{"file_path": "auth.py", "start_line": 8, "end_line": 9}]
+  },
+  {
+    "question": "Where is the database connection established?",
+    "expected": [{"file_path": "database.py", "start_line": 1, "end_line": 2}]
+  },
+  {
+    "question": "Which function fetches a user using a user ID?",
+    "expected": [{"file_path": "database.py", "start_line": 5, "end_line": 6}]
+  },
+  {
+    "question": "Which modules are described as part of this sample project?",
+    "expected": [{"file_path": "README.md", "start_line": 5, "end_line": 5}]
+  },
+  {
+    "question": "What is this project intended to test?",
+    "expected": [{"file_path": "README.md", "start_line": 3, "end_line": 3}]
+  }
+]

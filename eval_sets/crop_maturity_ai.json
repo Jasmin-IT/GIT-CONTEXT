@@ -1,0 +1,137 @@
+[
+  {
+    "question": "How does the application validate an input image and reject images that are too small?",
+    "expected": [
+      {
+        "file_path": "app/analyzer.py",
+        "start_line": 12,
+        "end_line": 30
+      }
+    ]
+  },
+  {
+    "question": "What warnings are produced when an image is dark or blurry?",
+    "expected": [
+      {
+        "file_path": "app/analyzer.py",
+        "start_line": 33,
+        "end_line": 41
+      }
+    ]
+  },
+  {
+    "question": "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?",
+    "expected": [
+      {
+        "file_path": "app/analyzer.py",
+        "start_line": 83,
+        "end_line": 121
+      },
+      {
+        "file_path": "app/config.py",
+        "start_line": 1,
+        "end_line": 12
+      }
+    ]
+  },
+  {
+    "question": "How does the analyzer use CLIP probabilities to reject detections that are not tomatoes?",
+    "expected": [
+      {
+        "file_path": "app/analyzer.py",
+        "start_line": 72,
+        "end_line": 81
+      },
+      {
+        "file_path": "app/verifier.py",
+        "start_line": 1,
+        "end_line": 25
+      }
+    ]
+  },
+  {
+    "question": "Which maturity classes and readiness weights are configured for the model?",
+    "expected": [
+      {
+        "file_path": "app/config.py",
+        "start_line": 1,
+        "end_line": 12
+      }
+    ]
+  },
+  {
+    "question": "How does the predict endpoint validate uploaded image formats and size and handle invalid images?",
+    "expected": [
+      {
+        "file_path": "app/api.py",
+        "start_line": 57,
+        "end_line": 78
+      }
+    ]
+  },
+  {
+    "question": "What information does the health endpoint return about the loaded model and AI services?",
+    "expected": [
+      {
+        "file_path": "app/api.py",
+        "start_line": 40,
+        "end_line": 53
+      }
+    ]
+  },
+  {
+    "question": "How are Markdown knowledge-base documents split into retrieval chunks?",
+    "expected": [
+      {
+        "file_path": "app/rag.py",
+        "start_line": 19,
+        "end_line": 40
+      }
+    ]
+  },
+  {
+    "question": "How does RAG search limit results by cosine distance and format the returned passages?",
+    "expected": [
+      {
+        "file_path": "app/rag.py",
+        "start_line": 73,
+        "end_line": 84
+      }
+    ]
+  },
+  {
+    "question": "How does the LLM fall back from Gemini to the configured backup provider?",
+    "expected": [
+      {
+        "file_path": "app/llm.py",
+        "start_line": 134,
+        "end_line": 154
+      }
+    ]
+  },
+  {
+    "question": "How does the application detect unsupported numeric claims in an LLM response and use a fallback?",
+    "expected": [
+      {
+        "file_path": "app/llm.py",
+        "start_line": 70,
+        "end_line": 77
+      },
+      {
+        "file_path": "app/llm.py",
+        "start_line": 157,
+        "end_line": 170
+      }
+    ]
+  },
+  {
+    "question": "How does the database store a detection and convert its counts back from JSON?",
+    "expected": [
+      {
+        "file_path": "app/db.py",
+        "start_line": 39,
+        "end_line": 53
+      }
+    ]
+  }
+]

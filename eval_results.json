@@ -1,0 +1,2174 @@
+{
+  "dataset_questions": 12,
+  "retrieval": [
+    {
+      "mode": "bm25",
+      "recall@1": 0.16666666666666666,
+      "recall@3": 0.25,
+      "recall@5": 0.4583333333333333,
+      "hit_rate@1": 0.16666666666666666,
+      "hit_rate@3": 0.25,
+      "hit_rate@5": 0.5,
+      "precision@1": 0.16666666666666666,
+      "precision@3": 0.08333333333333333,
+      "precision@5": 0.09999999999999999,
+      "mrr": 0.2673611111111111,
+      "latency_p50_ms": 21.762950054835528,
+      "latency_p95_ms": 25.79039998818189,
+      "misses": [
+        "How does the application validate an input image and reject images that are too small?",
+        "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?",
+        "Which maturity classes and readiness weights are configured for the model?",
+        "How are Markdown knowledge-base documents split into retrieval chunks?",
+        "How does the application detect unsupported numeric claims in an LLM response and use a fallback?",
+        "How does the database store a detection and convert its counts back from JSON?"
+      ],
+      "question_results": [
+        {
+          "question": "How does the application validate an input image and reject images that are too small?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "knowledge_base/growth_stages.md",
+              "start_line": 1,
+              "end_line": 44,
+              "relevant": false
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 51,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            },
+            {
+              "file_path": "frontend/README.md",
+              "start_line": 1,
+              "end_line": 16,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "What warnings are produced when an image is dark or blurry?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": true
+            },
+            {
+              "file_path": "knowledge_base/tomato_ripeness_stages.md",
+              "start_line": 1,
+              "end_line": 40,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/edge_tests.py",
+              "start_line": 10,
+              "end_line": 25,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 174,
+              "end_line": 179,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 38,
+              "end_line": 53,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the analyzer use CLIP probabilities to reject detections that are not tomatoes?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81
+            },
+            {
+              "file_path": "app/verifier.py",
+              "start_line": 1,
+              "end_line": 25
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 51,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "Which maturity classes and readiness weights are configured for the model?",
+          "expected": [
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/tomato_ripeness_stages.md",
+              "start_line": 1,
+              "end_line": 40,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the predict endpoint validate uploaded image formats and size and handle invalid images?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 57,
+              "end_line": 78
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 191,
+              "end_line": 214,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/growth_stages.md",
+              "start_line": 1,
+              "end_line": 44,
+              "relevant": false
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 24,
+              "end_line": 32,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 56,
+              "end_line": 78,
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "question": "What information does the health endpoint return about the loaded model and AI services?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 40,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 24,
+              "end_line": 32,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 39,
+              "end_line": 53,
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "question": "How are Markdown knowledge-base documents split into retrieval chunks?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 19,
+              "end_line": 40
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/growth_stages.md",
+              "start_line": 1,
+              "end_line": 44,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/tomato_ripeness_stages.md",
+              "start_line": 1,
+              "end_line": 40,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does RAG search limit results by cosine distance and format the returned passages?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84,
+              "relevant": true
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 1,
+              "end_line": 11,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 87,
+              "end_line": 93,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 191,
+              "end_line": 214,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 202,
+              "end_line": 211,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the LLM fall back from Gemini to the configured backup provider?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 81,
+              "end_line": 109,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the application detect unsupported numeric claims in an LLM response and use a fallback?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 70,
+              "end_line": 77
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 191,
+              "end_line": 214,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the database store a detection and convert its counts back from JSON?",
+          "expected": [
+            {
+              "file_path": "app/db.py",
+              "start_line": 39,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 191,
+              "end_line": 214,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "vector",
+      "recall@1": 0.4583333333333333,
+      "recall@3": 0.7916666666666666,
+      "recall@5": 0.8333333333333334,
+      "hit_rate@1": 0.5,
+      "hit_rate@3": 0.8333333333333334,
+      "hit_rate@5": 0.9166666666666666,
+      "precision@1": 0.5,
+      "precision@3": 0.2777777777777778,
+      "precision@5": 0.19999999999999998,
+      "mrr": 0.6562499999999999,
+      "latency_p50_ms": 25.744349986780435,
+      "latency_p95_ms": 29.5607999432832,
+      "misses": [
+        "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?"
+      ],
+      "question_results": [
+        {
+          "question": "How does the application validate an input image and reject images that are too small?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30,
+              "relevant": true
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/edge_tests.py",
+              "start_line": 10,
+              "end_line": 25,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/edge_tests.py",
+              "start_line": 8,
+              "end_line": 8,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "What warnings are produced when an image is dark or blurry?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": true
+            },
+            {
+              "file_path": "scripts/edge_tests.py",
+              "start_line": 10,
+              "end_line": 25,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30,
+              "relevant": false
+            },
+            {
+              "file_path": "report_assets/benchmark_cpu.txt",
+              "start_line": 1,
+              "end_line": 11,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 8,
+              "end_line": 9,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 44,
+              "end_line": 47,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 174,
+              "end_line": 179,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the analyzer use CLIP probabilities to reject detections that are not tomatoes?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81
+            },
+            {
+              "file_path": "app/verifier.py",
+              "start_line": 1,
+              "end_line": 25
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 50,
+              "end_line": 50,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/verify_test.py",
+              "start_line": 1,
+              "end_line": 16,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 174,
+              "end_line": 179,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "Which maturity classes and readiness weights are configured for the model?",
+          "expected": [
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 51,
+              "relevant": true
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 44,
+              "end_line": 47,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 144,
+              "end_line": 149,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the predict endpoint validate uploaded image formats and size and handle invalid images?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 57,
+              "end_line": 78
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 56,
+              "end_line": 78,
+              "relevant": true
+            },
+            {
+              "file_path": "frontend/src/api.js",
+              "start_line": 1,
+              "end_line": 141,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/edge_tests.py",
+              "start_line": 8,
+              "end_line": 8,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "What information does the health endpoint return about the loaded model and AI services?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 40,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 39,
+              "end_line": 53,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/list_backup_models.py",
+              "start_line": 1,
+              "end_line": 10,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 112,
+              "end_line": 131,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How are Markdown knowledge-base documents split into retrieval chunks?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 19,
+              "end_line": 40
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 43,
+              "end_line": 60,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 19,
+              "end_line": 40,
+              "relevant": true
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 202,
+              "end_line": 211,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 243,
+              "end_line": 252,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does RAG search limit results by cosine distance and format the returned passages?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 214,
+              "end_line": 216,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 1,
+              "end_line": 11,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84,
+              "relevant": true
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 219,
+              "end_line": 221,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 202,
+              "end_line": 211,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the LLM fall back from Gemini to the configured backup provider?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 5,
+              "end_line": 5,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 81,
+              "end_line": 109,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the application detect unsupported numeric claims in an LLM response and use a fallback?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 70,
+              "end_line": 77
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170,
+              "relevant": true
+            },
+            {
+              "file_path": "mobile/analysis_options.yaml",
+              "start_line": 1,
+              "end_line": 35,
+              "relevant": false
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 24,
+              "end_line": 32,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154,
+              "relevant": false
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 5,
+              "end_line": 5,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the database store a detection and convert its counts back from JSON?",
+          "expected": [
+            {
+              "file_path": "app/db.py",
+              "start_line": 39,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 157,
+              "end_line": 159,
+              "relevant": false
+            },
+            {
+              "file_path": "app/db.py",
+              "start_line": 68,
+              "end_line": 70,
+              "relevant": false
+            },
+            {
+              "file_path": "app/db.py",
+              "start_line": 39,
+              "end_line": 42,
+              "relevant": true
+            },
+            {
+              "file_path": "scripts/inspect_dataset.py",
+              "start_line": 1,
+              "end_line": 29,
+              "relevant": false
+            },
+            {
+              "file_path": "app/db.py",
+              "start_line": 45,
+              "end_line": 53,
+              "relevant": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "hybrid",
+      "recall@1": 0.4583333333333333,
+      "recall@3": 0.6666666666666666,
+      "recall@5": 0.75,
+      "hit_rate@1": 0.5,
+      "hit_rate@3": 0.75,
+      "hit_rate@5": 0.8333333333333334,
+      "precision@1": 0.5,
+      "precision@3": 0.25,
+      "precision@5": 0.16666666666666666,
+      "mrr": 0.6577380952380952,
+      "latency_p50_ms": 28.041199955623597,
+      "latency_p95_ms": 29.351199977099895,
+      "misses": [
+        "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?",
+        "How are Markdown knowledge-base documents split into retrieval chunks?"
+      ],
+      "question_results": [
+        {
+          "question": "How does the application validate an input image and reject images that are too small?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30,
+              "relevant": true
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/scene_eval.py",
+              "start_line": 1,
+              "end_line": 40,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "What warnings are produced when an image is dark or blurry?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": true
+            },
+            {
+              "file_path": "scripts/edge_tests.py",
+              "start_line": 10,
+              "end_line": 25,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/make_test_Set.py",
+              "start_line": 16,
+              "end_line": 50,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 174,
+              "end_line": 179,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 38,
+              "end_line": 53,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the analyzer use CLIP probabilities to reject detections that are not tomatoes?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81
+            },
+            {
+              "file_path": "app/verifier.py",
+              "start_line": 1,
+              "end_line": 25
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81,
+              "relevant": true
+            },
+            {
+              "file_path": "scripts/verify_test.py",
+              "start_line": 1,
+              "end_line": 16,
+              "relevant": false
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 51,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/harvest_indicators.md",
+              "start_line": 1,
+              "end_line": 39,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "Which maturity classes and readiness weights are configured for the model?",
+          "expected": [
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121,
+              "relevant": false
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 51,
+              "relevant": true
+            },
+            {
+              "file_path": "knowledge_base/growth_stages.md",
+              "start_line": 1,
+              "end_line": 44,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the predict endpoint validate uploaded image formats and size and handle invalid images?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 57,
+              "end_line": 78
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 56,
+              "end_line": 78,
+              "relevant": true
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 123,
+              "end_line": 140,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "LaboroTomato/examples/README.md",
+              "start_line": 1,
+              "end_line": 4,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "What information does the health endpoint return about the loaded model and AI services?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 40,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 39,
+              "end_line": 53,
+              "relevant": true
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 24,
+              "end_line": 32,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How are Markdown knowledge-base documents split into retrieval chunks?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 19,
+              "end_line": 40
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 219,
+              "end_line": 221,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 43,
+              "end_line": 60,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 243,
+              "end_line": 252,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 87,
+              "end_line": 93,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does RAG search limit results by cosine distance and format the returned passages?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84,
+              "relevant": true
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 1,
+              "end_line": 11,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 87,
+              "end_line": 93,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 202,
+              "end_line": 211,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 214,
+              "end_line": 216,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the LLM fall back from Gemini to the configured backup provider?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 81,
+              "end_line": 109,
+              "relevant": false
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 24,
+              "end_line": 32,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the application detect unsupported numeric claims in an LLM response and use a fallback?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 70,
+              "end_line": 77
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "mobile/ios/Flutter/ephemeral/flutter_lldb_helper.py",
+              "start_line": 24,
+              "end_line": 32,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the database store a detection and convert its counts back from JSON?",
+          "expected": [
+            {
+              "file_path": "app/db.py",
+              "start_line": 39,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "scripts/inspect_dataset.py",
+              "start_line": 1,
+              "end_line": 29,
+              "relevant": false
+            },
+            {
+              "file_path": "app/db.py",
+              "start_line": 45,
+              "end_line": 53,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/db.py",
+              "start_line": 1,
+              "end_line": 23,
+              "relevant": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "rerank",
+      "recall@1": 0.5416666666666666,
+      "recall@3": 0.8333333333333334,
+      "recall@5": 0.8333333333333334,
+      "hit_rate@1": 0.5833333333333334,
+      "hit_rate@3": 0.9166666666666666,
+      "hit_rate@5": 0.9166666666666666,
+      "precision@1": 0.5833333333333334,
+      "precision@3": 0.3333333333333333,
+      "precision@5": 0.19999999999999998,
+      "mrr": 0.736111111111111,
+      "latency_p50_ms": 985.008449992165,
+      "latency_p95_ms": 1046.50810000021,
+      "misses": [
+        "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?"
+      ],
+      "question_results": [
+        {
+          "question": "How does the application validate an input image and reject images that are too small?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30,
+              "relevant": true
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": false
+            },
+            {
+              "file_path": "frontend/src/api.js",
+              "start_line": 1,
+              "end_line": 141,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/inspect_image.py",
+              "start_line": 20,
+              "end_line": 40,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "What warnings are produced when an image is dark or blurry?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 33,
+              "end_line": 41,
+              "relevant": true
+            },
+            {
+              "file_path": "scripts/edge_tests.py",
+              "start_line": 10,
+              "end_line": 25,
+              "relevant": false
+            },
+            {
+              "file_path": "report_assets/test_summary.txt",
+              "start_line": 1,
+              "end_line": 110,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/make_test_Set.py",
+              "start_line": 16,
+              "end_line": 50,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How is harvest readiness calculated from the unripe, semiripe, and ripe percentages?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 174,
+              "end_line": 179,
+              "relevant": false
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 38,
+              "end_line": 53,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 182,
+              "end_line": 188,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the analyzer use CLIP probabilities to reject detections that are not tomatoes?",
+          "expected": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81
+            },
+            {
+              "file_path": "app/verifier.py",
+              "start_line": 1,
+              "end_line": 25
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 72,
+              "end_line": 81,
+              "relevant": true
+            },
+            {
+              "file_path": "README.md",
+              "start_line": 1,
+              "end_line": 197,
+              "relevant": false
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 51,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/verify_test.py",
+              "start_line": 1,
+              "end_line": 16,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 28,
+              "end_line": 35,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "Which maturity classes and readiness weights are configured for the model?",
+          "expected": [
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 12
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "knowledge_base/system_notes.md",
+              "start_line": 1,
+              "end_line": 14,
+              "relevant": false
+            },
+            {
+              "file_path": "app/config.py",
+              "start_line": 1,
+              "end_line": 51,
+              "relevant": true
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 39,
+              "end_line": 53,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the predict endpoint validate uploaded image formats and size and handle invalid images?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 57,
+              "end_line": 78
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 12,
+              "end_line": 30,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 56,
+              "end_line": 78,
+              "relevant": true
+            },
+            {
+              "file_path": "frontend/src/api.js",
+              "start_line": 1,
+              "end_line": 141,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/inspect_image.py",
+              "start_line": 20,
+              "end_line": 40,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 81,
+              "end_line": 99,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "What information does the health endpoint return about the loaded model and AI services?",
+          "expected": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 40,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/api.py",
+              "start_line": 39,
+              "end_line": 53,
+              "relevant": true
+            },
+            {
+              "file_path": "frontend/src/api.js",
+              "start_line": 1,
+              "end_line": 141,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 112,
+              "end_line": 131,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 81,
+              "end_line": 109,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How are Markdown knowledge-base documents split into retrieval chunks?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 19,
+              "end_line": 40
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 1,
+              "end_line": 11,
+              "relevant": false
+            },
+            {
+              "file_path": "scripts/prepare_dataset.py",
+              "start_line": 27,
+              "end_line": 91,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 19,
+              "end_line": 40,
+              "relevant": true
+            },
+            {
+              "file_path": "scripts/prepare_dataset.py",
+              "start_line": 19,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 243,
+              "end_line": 252,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does RAG search limit results by cosine distance and format the returned passages?",
+          "expected": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/rag.py",
+              "start_line": 73,
+              "end_line": 84,
+              "relevant": true
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 1,
+              "end_line": 11,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 202,
+              "end_line": 211,
+              "relevant": false
+            },
+            {
+              "file_path": "app/api.py",
+              "start_line": 214,
+              "end_line": 216,
+              "relevant": false
+            },
+            {
+              "file_path": "app/rag.py",
+              "start_line": 19,
+              "end_line": 40,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the LLM fall back from Gemini to the configured backup provider?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 81,
+              "end_line": 109,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 112,
+              "end_line": 131,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the application detect unsupported numeric claims in an LLM response and use a fallback?",
+          "expected": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 70,
+              "end_line": 77
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/llm.py",
+              "start_line": 1,
+              "end_line": 24,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 157,
+              "end_line": 170,
+              "relevant": true
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 134,
+              "end_line": 154,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 191,
+              "end_line": 214,
+              "relevant": false
+            },
+            {
+              "file_path": "app/llm.py",
+              "start_line": 81,
+              "end_line": 109,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "question": "How does the database store a detection and convert its counts back from JSON?",
+          "expected": [
+            {
+              "file_path": "app/db.py",
+              "start_line": 39,
+              "end_line": 53
+            }
+          ],
+          "top_results": [
+            {
+              "file_path": "app/db.py",
+              "start_line": 45,
+              "end_line": 53,
+              "relevant": true
+            },
+            {
+              "file_path": "app/db.py",
+              "start_line": 1,
+              "end_line": 23,
+              "relevant": false
+            },
+            {
+              "file_path": "app/db.py",
+              "start_line": 39,
+              "end_line": 42,
+              "relevant": true
+            },
+            {
+              "file_path": "scripts/inspect_dataset.py",
+              "start_line": 1,
+              "end_line": 29,
+              "relevant": false
+            },
+            {
+              "file_path": "app/analyzer.py",
+              "start_line": 83,
+              "end_line": 121,
+              "relevant": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "comparison": {
+    "hybrid_vs_rerank": {
+      "recall@5_delta": 0.08333333333333337,
+      "mrr_delta": 0.07837301587301582,
+      "latency_p50_ms_delta": 956.9672500365414
+    }
+  }
+}

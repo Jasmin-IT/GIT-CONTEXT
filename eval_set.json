@@ -1,0 +1,18 @@
+[
+  {
+    "question": "Which function handles the user input when the equals button is pressed?",
+    "expected": [{"file_path": "script.js"}]
+  },
+  {
+    "question": "How does the calculator handle the percentage operation?",
+    "expected": [{"file_path": "script.js"}]
+  },
+  {
+    "question": "Where is the calculate function called from in the HTML?",
+    "expected": [{"file_path": "calci.html"}]
+  },
+  {
+    "question": "Which rule does the calculator follow for the order of operations?",
+    "expected": [{"file_path": "README.md"}]
+  }
+]
