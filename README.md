@@ -1,144 +1,124 @@
-# GitContext
+# GitContext: Codebase Intelligence Copilot
 
-GitContext is a local codebase intelligence app. It indexes a repository and
-answers questions using hybrid vector/BM25 retrieval, reciprocal-rank fusion,
-cross-encoder reranking, and evidence-checked citations.
+Ask questions about any public GitHub repository, local project, or ZIP and get answers grounded in the real code, with **evidence-checked citations** pointing to the exact files and line ranges.
+
+
+## Why GitContext
+
+Plain keyword search misses meaning, and plain vector search misses exact names. GitContext combines both, then reranks the candidates with a cross-encoder, so questions like *"How does Flask register routes?"* and *"Where is the dev server started?"* both land on the right code. Retrieval quality is measured, not assumed: the repo ships with an evaluation harness that compares BM25, vector, hybrid, and hybrid + reranking on manually labeled questions.
+
+
+
+## Architecture
+
+```mermaid
+flowchart LR
+    A[GitHub repo / local folder / ZIP] --> B[Loader]
+    B --> C[Chunker<br/>function, class, module]
+    C --> D[Embeddings]
+    D --> E[(Chroma)]
+    C --> F[BM25 index]
+    B --> M[(SQLite<br/>catalog + chat history)]
+    Q[Question] --> R[Hybrid retrieval]
+    E --> R
+    F --> R
+    R -->|Reciprocal Rank Fusion| X[Cross-encoder reranker]
+    X --> L[LLM: Groq, Gemini fallback]
+    L --> V[Citation check]
+    V --> Z[Answer + sources]
+```
 
 ## Features
 
-- Load a local repository, a **public** GitHub repository and branch, or a ZIP.
-- Index recent GitHub commits, pull-request descriptions/reviews, and
-  bug/incident-style issues alongside repository files.
-- Incrementally index changed and deleted files into persistent local Chroma.
-- Search per repository using vector similarity and BM25, then rerank results.
-- Generate answers with Groq as the primary LLM and Gemini as fallback.
-- Stream answers in the Streamlit chat UI, persist repository-specific chat
-  history, and show response timing and source metadata.
-- Use a responsive dark interface with icon-based navigation, repository
-  status and indexing details, suggested prompts, and expandable source cards.
-- Inspect a repository architecture summary and local Python/JS/TS dependencies.
-- Compare BM25, vector, hybrid, and reranked retrieval against manually labeled
-  repository-specific evaluation data.
+- **Flexible input**: local repository, public GitHub repository and branch, or ZIP upload
+- **Beyond code**: indexes recent commits, pull-request descriptions/reviews, and bug/incident-style issues alongside files
+- **Incremental indexing**: only changed and deleted files are re-indexed into persistent local Chroma
+- **Hybrid retrieval**: vector similarity + BM25, fused with Reciprocal Rank Fusion, then cross-encoder reranking
+- **Grounded answers**: Groq as primary LLM, Gemini as fallback; citations are validated against retrieved evidence
+- **Streamlit chat UI**: streaming answers, per-repository chat history, response timing, expandable source cards
+- **Repository insights**: architecture summary and local Python/JS/TS dependency view
+- **Built-in evaluation**: Recall@K, Precision@K, hit rate, MRR, latency, and citation validity
+- **Runs locally**: SQLite and Chroma data stay under `data/`; API keys come from `.env`
 
-The app runs locally. SQLite and Chroma data are stored under `data/`; API keys
-are read from environment variables or a local `.env` file.
+## Tech stack
 
-## Setup (Windows PowerShell)
+| Layer | Tools |
+|---|---|
+| Backend | Python, FastAPI |
+| Frontend | Streamlit |
+| Retrieval | ChromaDB, BM25, Reciprocal Rank Fusion, cross-encoder reranker |
+| Storage | ChromaDB (vectors), SQLite (catalog, chat history) |
+| LLMs | Groq (primary), Gemini (fallback) |
+| Ingestion | GitHub API, local files, ZIP |
 
-Use Python 3.10 or newer:
+## Quick start
+
+Requires Python 3.10+.
 
 ```powershell
-cd folder_name
+git clone https://github.com/Jasmin-IT/<repo-name>.git
+cd <repo-name>
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+.\.venv\Scripts\Activate.ps1          # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-Copy-Item .env.example .env
+Copy-Item .env.example .env           # macOS/Linux: cp .env.example .env
 ```
 
-Set at least one LLM key in `.env`. Groq is tried first; Gemini is only used
-when Groq is unavailable or fails:
+Add at least one key to `.env` (needed only to generate answers; indexing and retrieval work without it):
 
 ```dotenv
 GROQ_API_KEY=your_groq_api_key
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-Both keys are optional for indexing and retrieval, but an LLM key is needed to
-generate answers. Never commit `.env` or put API keys in source code.
-
-## Run the application
-
-Start the API from the project directory in one PowerShell terminal:
+Run the API and the UI in two terminals:
 
 ```powershell
-cd E:\Desktop\LLM
-.\.venv\Scripts\Activate.ps1
-uvicorn api:app --reload
+uvicorn api:app --reload              # API at http://127.0.0.1:8000  (docs at /docs)
+streamlit run frontend\app.py         # UI at http://localhost:8501
 ```
 
-In a second terminal, start the Streamlit interface:
+Set `API_BASE_URL` if the frontend should use a different API address. On first start, the embedding and reranking models may need to download.
 
-```powershell
-cd E:\Desktop\LLM
-.\.venv\Scripts\Activate.ps1
-streamlit run frontend\app.py
-```
-or 
+## Usage
 
-```powershell
-cd frontend
-streamlit run app.py
-```
+1. Paste a public GitHub URL, optionally pick a branch, or upload a ZIP.
+2. Click **Load repository** and wait for indexing to finish.
+3. Pick a suggested question or type your own. Expand the source cards to inspect the files behind each answer.
+4. Switch projects from **Indexed repositories**.
 
-Open the Streamlit URL printed by the command (normally
-`http://localhost:8501`). The API is at `http://127.0.0.1:8000`; its interactive
-OpenAPI page is `/docs`. Set `API_BASE_URL` if the frontend should use a
-different API address.
 
-### Load a repository and ask questions
 
-1. Make sure the API is running, then open the Streamlit URL in your browser.
-2. In the sidebar, paste a public GitHub repository URL, for example
-   `https://github.com/pallets/flask`.
-3. Optionally select a branch, then choose **Load repository** and wait for
-   indexing to finish. The active repository and indexing details appear in the
-   sidebar.
-4. Choose a suggested question or enter your own in the chat box. Assistant
-   responses include expandable source details so you can inspect the files
-   behind an answer.
-5. To switch projects, load another repository or choose one from
-   **Indexed repositories** and select **Switch repository**.
+## Indexing details and limits
 
-Example questions for Flask:
-
-- How does Flask register routes?
-- How are request and application contexts managed?
-- How does Flask handle errors raised by a view?
-- Where is the development server started?
-
-Generated answers require an LLM key configured in `.env`. Repository loading
-and retrieval can be used without one. Chatting in Streamlit is for interactive
-exploration; retrieval metrics require a separate, manually labeled evaluation
-set as described below.
-
-On first start, the embedding and reranking models may need to download. If a
-saved repository cannot be restored, the API remains available so another
-repository can be loaded from the UI.
-
-## Repository input and indexing
-
-In the sidebar, paste a public GitHub repository URL and optionally select a
-branch, or upload a ZIP archive. Private GitHub repositories are not supported.
-ZIP files are limited to 25 MB compressed and 100 MB uncompressed; archives are
-validated for unsafe paths and symbolic links and are not extracted to disk.
-Files larger than 1 MB and unsupported extensions are skipped. Common virtual
-environments, dependency/build caches, generated output, and dataset folders
-are excluded.
-GitHub code files are loaded from the selected branch. Git history and issue
-context are intentionally bounded to the five most recent records per category
-and at most ten comments per record to limit public API usage; this is not a
-complete archive of all repository discussions.
-
-Repository catalog, chat history, ZIP archives, and Chroma vectors persist
-locally under `data/`. The repository selector switches the active index;
-each query is filtered to the selected repository.
-
-Query rewriting is disabled by default to avoid an extra LLM call. Enable
-**Use AI query rewriting** in the UI when useful, or set
-`GITCONTEXT_QUERY_REWRITE=true` for CLI use.
+- Public GitHub repositories only; private repositories are not supported.
+- ZIP limits: 25 MB compressed, 100 MB uncompressed. Archives are validated for unsafe paths and symlinks and are not extracted to disk.
+- Files over 1 MB and unsupported extensions are skipped. Virtual environments, dependency/build caches, generated output, and dataset folders are excluded.
+- To limit GitHub API usage, history and issue context is bounded to the 5 most recent records per category and at most 10 comments per record. It is not a complete archive.
+- AI query rewriting is off by default (saves an LLM call). Enable it in the UI or set `GITCONTEXT_QUERY_REWRITE=true` for CLI use.
 
 ## Evaluation
 
-Evaluation requires repository-specific gold labels; retrieval metrics are not
-meaningful without manually verified expected files/ranges. First inspect the
-selected repository's chunk paths and line ranges:
+Retrieval metrics need repository-specific gold labels. Inspect chunk paths and line ranges first:
 
 ```powershell
 python evaluate.py --repository-path "C:\work\my-project" --list-chunks
 ```
 
-Then create a JSON dataset and run:
+Create a dataset:
+
+```json
+[
+  {
+    "question": "Where is user input validated?",
+    "expected": [
+      { "file_path": "src/validation.py", "start_line": 10, "end_line": 24 }
+    ]
+  }
+]
+```
+
+Run it:
 
 ```powershell
 python evaluate.py --repository-path "C:\work\my-project" --eval-file "eval_sets\my-project.json"
@@ -147,18 +127,13 @@ python evaluate.py --repository-path "C:\work\my-project" --eval-file "eval_sets
 python evaluate.py --repository-path "C:\work\my-project" --eval-file "eval_sets\my-project.json" --answers
 ```
 
-
-The evaluator checks BM25, vector, hybrid, and hybrid-plus-reranking retrieval
-with Recall@K, Precision@K, hit rate, MRR, and latency; it records per-question
-results and misses. `--answers` additionally measures citation validity and
-overlap with the gold labels, plus retrieval and end-to-end response latency.
-Results are written to `eval_results.json`. A representative dataset is
-necessary to draw conclusions about retrieval or answer quality.
-Citation checks are not a substitute for human review of answer correctness or
-hallucination resistance.
+`--answers` also measures citation validity, overlap with gold labels, and end-to-end latency. Citation checks do not replace human review of answer correctness or hallucination resistance.
 
 ## Tests
 
 ```powershell
 python -m unittest discover -s tests -v
 ```
+
+chnology
+[LinkedIn](https://www.linkedin.com/in/jasmin-nirmala-d-4353a02b5) | [GitHub](https://github.com/Jasmin-IT)
