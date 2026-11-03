@@ -56,7 +56,7 @@ flowchart LR
 Requires Python 3.10+.
 
 ```powershell
-git clone https://github.com/Jasmin-IT/<repo-name>.git
+git clone https://github.com/Jasmin-IT/GIT-CONTEXT.git
 cd <repo-name>
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1          # macOS/Linux: source .venv/bin/activate
@@ -134,6 +134,3 @@ python evaluate.py --repository-path "C:\work\my-project" --eval-file "eval_sets
 ```powershell
 python -m unittest discover -s tests -v
 ```
-
-chnology
-[LinkedIn](https://www.linkedin.com/in/jasmin-nirmala-d-4353a02b5) | [GitHub](https://github.com/Jasmin-IT)
