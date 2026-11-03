@@ -1,6 +1,7 @@
 import os
 import json
 import uuid
+from pathlib import Path
 import requests
 import streamlit as st
 from dotenv import load_dotenv
@@ -29,7 +30,7 @@ CHAT_HISTORY_ENDPOINT = f"{API_BASE_URL}/chat/history"
 
 st.set_page_config(
     page_title="GitContext",
-    page_icon="💻",
+    page_icon=str(Path(__file__).with_name("gitcontext.svg")),
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -42,47 +43,205 @@ st.markdown(
     """
 
 <style>
+:root {
+    color-scheme: dark;
+    --app-bg: #0b1020;
+    --panel-bg: #111a2c;
+    --panel-raised: #162238;
+    --border: rgba(148, 163, 184, 0.16);
+    --text-main: #edf3ff;
+    --text-muted: #9aa9c0;
+    --accent: #73a7ff;
+    --accent-strong: #4f83ef;
+}
 
-.main {
-    background-color: #0e1117;
+.stApp {
+    background:
+        radial-gradient(ellipse at 70% -15%, rgba(57, 103, 180, 0.22), transparent 42%),
+        var(--app-bg);
+    color: var(--text-main);
 }
 
 .block-container {
+    max-width: 1320px;
     padding-top: 2rem;
-    max-width: 1200px;
+    padding-bottom: 4rem;
 }
 
-[data-testid="stSidebar"] {
-    background-color: #161b22;
+section[data-testid="stSidebar"] {
+    background: #0d1525;
+    border-right: 1px solid var(--border);
+}
+
+section[data-testid="stSidebar"] > div {
+    padding-top: 1.4rem;
 }
 
 .header-title {
-    font-size: 36px;
-    font-weight: 700;
-    color: #58a6ff;
+    color: var(--text-main);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 750;
+    letter-spacing: -0.045em;
+    line-height: 1.12;
+    margin: 0;
 }
 
 .header-subtitle {
-    font-size: 16px;
-    color: #8b949e;
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin-top: 0.55rem;
+    max-width: 720px;
 }
 
-.source-card {
-    background-color: #161b22;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #30363d;
-    margin-bottom: 10px;
+.hero-kicker {
+    color: #8bb5ff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    margin-bottom: 0.75rem;
+}
+
+.hero {
+    background: linear-gradient(125deg, rgba(20, 34, 57, 0.96), rgba(15, 24, 42, 0.78));
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    margin: 0.35rem 0 1.5rem;
+    padding: clamp(1.4rem, 3vw, 2.3rem);
+}
+
+.hero h1 {
+    color: var(--text-main);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 750;
+    letter-spacing: -0.045em;
+    line-height: 1.12;
+    margin: 0;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0.75rem 0 0;
+    max-width: 720px;
+}
+
+section[data-testid="stSidebar"] h2 {
+    color: var(--text-main);
+    letter-spacing: -0.025em;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-caption,
+.muted-copy {
+    color: var(--text-muted);
+}
+
+.status-online,
+.status-offline {
+    align-items: center;
+    display: flex;
+    font-size: 0.88rem;
+    font-weight: 650;
+    gap: 0.55rem;
+    margin: 0.2rem 0 0.65rem;
 }
 
 .status-online {
-    color: #3fb950;
-    font-weight: bold;
+    color: #69d6a5;
 }
 
 .status-offline {
-    color: #f85149;
-    font-weight: bold;
+    color: #ff9a9a;
+}
+
+.status-online::before,
+.status-offline::before {
+    border-radius: 50%;
+    content: "";
+    display: inline-block;
+    height: 0.55rem;
+    width: 0.55rem;
+}
+
+.status-online::before {
+    background: #43ce8b;
+    box-shadow: 0 0 12px rgba(67, 206, 139, 0.55);
+}
+
+.status-offline::before {
+    background: #ef6b73;
+}
+
+[data-testid="stMetric"] {
+    background: rgba(17, 26, 44, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.8rem 1rem;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-muted);
+}
+
+[data-testid="stButton"] > button {
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    min-height: 2.65rem;
+    transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+
+[data-testid="stButton"] > button:hover {
+    border-color: rgba(115, 167, 255, 0.65);
+    transform: translateY(-1px);
+}
+
+[data-testid="stButton"] > button[kind="primary"] {
+    background: linear-gradient(135deg, #4f83ef, #3970dc);
+    border: 0;
+    color: white;
+    font-weight: 650;
+}
+
+[data-testid="stChatMessage"] {
+    background: rgba(17, 26, 44, 0.76);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 0.85rem;
+    padding: 1rem 1.15rem;
+}
+
+[data-testid="stChatInput"] {
+    border-color: rgba(115, 167, 255, 0.35);
+}
+
+[data-testid="stExpander"] {
+    background: rgba(17, 26, 44, 0.58);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+[data-testid="stFileUploader"] section {
+    background: rgba(17, 26, 44, 0.62);
+    border: 1px dashed rgba(148, 163, 184, 0.3);
+    border-radius: 12px;
+}
+
+hr {
+    border-color: var(--border);
+}
+
+@media (max-width: 700px) {
+    .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 1rem;
+    }
+
+    .hero {
+        border-radius: 15px;
+    }
 }
 
 </style>
@@ -361,9 +520,12 @@ if not st.session_state.get("history_loaded"):
 # --------------------------------------------------
 
 with st.sidebar:
-    st.markdown("## 💻 GitContext")
+    st.markdown("## :material/code_blocks: GitContext")
 
-    st.caption("AI-powered Codebase Intelligence")
+    st.markdown(
+        '<div class="sidebar-caption">Codebase intelligence workspace</div>',
+        unsafe_allow_html=True,
+    )
 
     st.divider()
 
@@ -373,7 +535,7 @@ with st.sidebar:
 
     if backend_status:
         st.markdown(
-            '<p class="status-online">● Backend Online</p>',
+            '<p class="status-online">Backend connected</p>',
             unsafe_allow_html=True,
         )
         if not backend_status.get("repository_loaded"):
@@ -384,7 +546,7 @@ with st.sidebar:
 
     else:
         st.markdown(
-            '<p class="status-offline">● Backend Offline</p>',
+            '<p class="status-offline">Backend offline</p>',
             unsafe_allow_html=True,
         )
 
@@ -433,7 +595,11 @@ with st.sidebar:
                     key="dependency_file_path",
                     placeholder="src/module.py",
                 )
-                if st.button("Show dependencies", key="show_file_dependencies"):
+                if st.button(
+                    "Show dependencies",
+                    key="show_file_dependencies",
+                    icon=":material/account_tree:",
+                ):
                     if not dependency_file.strip():
                         st.warning("Enter a repository-relative file path.")
                     else:
@@ -473,7 +639,11 @@ with st.sidebar:
                 if item["repository_id"] == repository_id
             ),
         )
-        if st.button("Switch repository", use_container_width=True):
+        if st.button(
+            "Switch repository",
+            use_container_width=True,
+            icon=":material/swap_horiz:",
+        ):
             with st.spinner("Switching repository..."):
                 result = select_registered_repository(selected_id)
             if "error" in result:
@@ -498,7 +668,11 @@ with st.sidebar:
             key="repository_url",
             placeholder="https://github.com/owner/repository",
         )
-        if st.button("List branches", use_container_width=True):
+        if st.button(
+            "List branches",
+            use_container_width=True,
+            icon=":material/account_tree:",
+        ):
             if not repository_url.strip():
                 st.warning("Enter a GitHub repository URL first.")
             else:
@@ -532,7 +706,12 @@ with st.sidebar:
             type=["zip"],
         )
 
-    submitted = st.button("Load repository", use_container_width=True)
+    submitted = st.button(
+        "Load repository",
+        use_container_width=True,
+        type="primary",
+        icon=":material/cloud_download:",
+    )
 
     if submitted:
         if repository_source == "GitHub URL" and not repository_url.strip():
@@ -571,7 +750,11 @@ with st.sidebar:
 
     st.markdown("### Actions")
 
-    if st.button("🗑️ Clear Conversation", use_container_width=True):
+    if st.button(
+        "Clear conversation",
+        use_container_width=True,
+        icon=":material/delete_outline:",
+    ):
         clear_saved_history()
         st.session_state.messages = []
 
@@ -583,39 +766,35 @@ with st.sidebar:
 
     st.divider()
 
-    st.caption("Built with Python • FastAPI • RAG • ChromaDB")
+    st.caption("Python · FastAPI · Retrieval · ChromaDB")
 
 # --------------------------------------------------
 # MAIN HEADER
 # --------------------------------------------------
 
 st.markdown(
-    '<div class="header-title">GitContext</div>', unsafe_allow_html=True
-)
-
-st.markdown(
-    '<div class="header-subtitle">'
-    "Understand your codebase using AI-powered retrieval."
-    "</div>",
+    '<section class="hero">'
+    '<div class="hero-kicker">CODEBASE INTELLIGENCE</div>'
+    '<h1>Understand your codebase</h1>'
+    '<p>Ask questions in plain language. Explore relevant files, follow '
+    'evidence-backed answers, and understand how your project fits together.</p>'
+    '</section>',
     unsafe_allow_html=True,
 )
-
-st.divider()
 
 # --------------------------------------------------
 # WELCOME SCREEN
 # --------------------------------------------------
 
 if not st.session_state.messages:
-    st.markdown("### 👋 Welcome to GitContext")
+    st.markdown("### Start exploring")
 
     st.write(
-        "Ask questions about your repository. "
-        "GitContext retrieves relevant code and generates "
-        "evidence-grounded answers."
+        "Choose a prompt to get started, or ask your own question below. "
+        "Answers include source files so you can verify the details."
     )
 
-    st.markdown("### Try asking")
+    st.markdown("#### Suggested questions")
 
     examples = [
         "Explain the overall architecture of this repository.",
@@ -630,7 +809,10 @@ if not st.session_state.messages:
     for index, example in enumerate(examples):
         with cols[index % 2]:
             if st.button(
-                example, key=f"example_{index}", use_container_width=True
+                example,
+                key=f"example_{index}",
+                use_container_width=True,
+                icon=":material/arrow_outward:",
             ):
                 st.session_state.pending_question = example
 
@@ -652,7 +834,7 @@ for message in st.session_state.messages:
             sources = message.get("sources", [])
 
             if sources:
-                with st.expander(f"📁 View Sources ({len(sources)})"):
+                with st.expander(f"View sources ({len(sources)})"):
                     for source in sources:
                         file_path = source.get("file_path", "Unknown file")
 
@@ -664,30 +846,26 @@ for message in st.session_state.messages:
 
                         score = source.get("score")
 
-                        st.markdown(f"**{file_path}**")
-
-                        st.caption(
-                            f"{chunk_name} | "
-                            f"Lines {start_line}-{end_line}"
-                        )
-
-                        if score is not None:
-                            st.caption(f"Rerank score: {score:.4f}")
-                        source_type = source.get("source_type", "source")
-                        details = [
-                            f"Source: {source_type}",
-                            source.get("branch"),
-                            source.get("author"),
-                        ]
-                        if source.get("pull_request_number") is not None:
-                            details.append(
-                                f"PR #{source['pull_request_number']}"
+                        with st.container(border=True):
+                            st.markdown(f"**`{file_path}`**")
+                            st.caption(
+                                f"{chunk_name} · Lines {start_line}-{end_line}"
                             )
-                        if source.get("issue_number") is not None:
-                            details.append(f"Issue #{source['issue_number']}")
-                        st.caption(" · ".join(item for item in details if item))
-
-                        st.divider()
+                            if score is not None:
+                                st.caption(f"Rerank score: {score:.4f}")
+                            source_type = source.get("source_type", "source")
+                            details = [
+                                f"Source: {source_type}",
+                                source.get("branch"),
+                                source.get("author"),
+                            ]
+                            if source.get("pull_request_number") is not None:
+                                details.append(
+                                    f"PR #{source['pull_request_number']}"
+                                )
+                            if source.get("issue_number") is not None:
+                                details.append(f"Issue #{source['issue_number']}")
+                            st.caption(" · ".join(item for item in details if item))
 
 # --------------------------------------------------
 # QUESTION PROCESSING
@@ -731,31 +909,30 @@ if question:
                     st.caption(f"Response time: {response_time_ms:.0f} ms")
 
                 if sources:
-                    with st.expander(f"📁 View Sources ({len(sources)})"):
+                    with st.expander(f"View sources ({len(sources)})"):
                         for source in sources:
-                            st.markdown(f"**{source.get('file_path')}**")
-
-                            st.caption(
-                                f"Lines "
-                                f"{source.get('start_line')}-"
-                                f"{source.get('end_line')}"
-                            )
-                            details = [
-                                f"Source: {source.get('source_type', 'source')}",
-                                source.get("branch"),
-                                source.get("author"),
-                            ]
-                            if source.get("pull_request_number") is not None:
-                                details.append(
-                                    f"PR #{source['pull_request_number']}"
+                            with st.container(border=True):
+                                st.markdown(
+                                    f"**`{source.get('file_path')}`**"
                                 )
-                            if source.get("issue_number") is not None:
-                                details.append(f"Issue #{source['issue_number']}")
-                            st.caption(
-                                " · ".join(item for item in details if item)
-                            )
-
-                            st.divider()
+                                st.caption(
+                                    f"Lines {source.get('start_line')}-"
+                                    f"{source.get('end_line')}"
+                                )
+                                details = [
+                                    f"Source: {source.get('source_type', 'source')}",
+                                    source.get("branch"),
+                                    source.get("author"),
+                                ]
+                                if source.get("pull_request_number") is not None:
+                                    details.append(
+                                        f"PR #{source['pull_request_number']}"
+                                    )
+                                if source.get("issue_number") is not None:
+                                    details.append(f"Issue #{source['issue_number']}")
+                                st.caption(
+                                    " · ".join(item for item in details if item)
+                                )
 
         st.session_state.messages.append(
             {

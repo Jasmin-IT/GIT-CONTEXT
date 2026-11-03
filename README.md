@@ -14,6 +14,8 @@ cross-encoder reranking, and evidence-checked citations.
 - Generate answers with Groq as the primary LLM and Gemini as fallback.
 - Stream answers in the Streamlit chat UI, persist repository-specific chat
   history, and show response timing and source metadata.
+- Use a responsive dark interface with icon-based navigation, repository
+  status and indexing details, suggested prompts, and expandable source cards.
 - Inspect a repository architecture summary and local Python/JS/TS dependencies.
 - Compare BM25, vector, hybrid, and reranked retrieval against manually labeled
   repository-specific evaluation data.
@@ -47,16 +49,18 @@ generate answers. Never commit `.env` or put API keys in source code.
 
 ## Run the application
 
-Start the API in one terminal:
+Start the API from the project directory in one PowerShell terminal:
 
 ```powershell
+cd E:\Desktop\LLM
 .\.venv\Scripts\Activate.ps1
 uvicorn api:app --reload
 ```
 
-Start Streamlit in another terminal:
+In a second terminal, start the Streamlit interface:
 
 ```powershell
+cd E:\Desktop\LLM
 .\.venv\Scripts\Activate.ps1
 streamlit run frontend\app.py
 ```
@@ -71,6 +75,32 @@ Open the Streamlit URL printed by the command (normally
 `http://localhost:8501`). The API is at `http://127.0.0.1:8000`; its interactive
 OpenAPI page is `/docs`. Set `API_BASE_URL` if the frontend should use a
 different API address.
+
+### Load a repository and ask questions
+
+1. Make sure the API is running, then open the Streamlit URL in your browser.
+2. In the sidebar, paste a public GitHub repository URL, for example
+   `https://github.com/pallets/flask`.
+3. Optionally select a branch, then choose **Load repository** and wait for
+   indexing to finish. The active repository and indexing details appear in the
+   sidebar.
+4. Choose a suggested question or enter your own in the chat box. Assistant
+   responses include expandable source details so you can inspect the files
+   behind an answer.
+5. To switch projects, load another repository or choose one from
+   **Indexed repositories** and select **Switch repository**.
+
+Example questions for Flask:
+
+- How does Flask register routes?
+- How are request and application contexts managed?
+- How does Flask handle errors raised by a view?
+- Where is the development server started?
+
+Generated answers require an LLM key configured in `.env`. Repository loading
+and retrieval can be used without one. Chatting in Streamlit is for interactive
+exploration; retrieval metrics require a separate, manually labeled evaluation
+set as described below.
 
 On first start, the embedding and reranking models may need to download. If a
 saved repository cannot be restored, the API remains available so another
